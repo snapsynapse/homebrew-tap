@@ -3,8 +3,8 @@ class Harnessie < Formula
 
   desc "Brain-agnostic multi-agent harness with verification gates and audit log"
   homepage "https://harnessie.com/"
-  url "https://files.pythonhosted.org/packages/95/7b/baa8c7ea19dbdbdac0fafe31478b781e3de2ac535553c26cf284ef557912/harnessie-0.6.0.tar.gz"
-  sha256 "4e431d610e9f08c4ccdb5113fb774a96cc68b04a12d5c5bd10de5212903c9295"
+  url "https://files.pythonhosted.org/packages/2e/c1/e6aa21440584f1ca0098aaa7e86132ca6c9fab9000360b847f27c96fc5e0/harnessie-0.7.1.tar.gz"
+  sha256 "a584cfbda10eeb4e6993077d5a766644a248204cde68caff23988db7382ba4c7"
   license "Apache-2.0"
 
   depends_on "python@3.13"
