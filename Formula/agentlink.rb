@@ -1,7 +1,6 @@
 class Agentlink < Formula
   desc "Sync one AGENTS.md to every AI coding tool - symlinks, no codegen"
   homepage "https://agentlink.run/"
-  version "0.4.2"
   license "MIT"
 
   on_macos do
