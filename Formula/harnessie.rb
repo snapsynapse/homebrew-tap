@@ -1,10 +1,10 @@
 class Harnessie < Formula
   include Language::Python::Virtualenv
 
-  desc "Brain-agnostic multi-agent harness with verification gates and audit log"
+  desc "Brain-agnostic agent harness with ownership and verification gates"
   homepage "https://harnessie.com/"
-  url "https://files.pythonhosted.org/packages/a8/9b/69601128b8dc0d0579c4b079042de716a1c69ff7806c9789629ec207ccca/harnessie-1.0.0.tar.gz"
-  sha256 "40c2daa307d71a4687321205fac8fc1a24b6778c4412fb1f20cb2b20f89bd787"
+  url "https://files.pythonhosted.org/packages/66/af/94eec316ff3bd5a6eb38e2c0d999959a92c9831394c0f5ef2dfc3cb50df3/harnessie-1.1.0.tar.gz"
+  sha256 "8a8c6e62348b647b2b9e02ecb1de846160d83ea224e7a467bdde6445d0486ba1"
   license "Apache-2.0"
 
   depends_on "rust" => :build
@@ -52,5 +52,10 @@ class Harnessie < Formula
     assert_path_exists testpath/"demo/config/models.yaml"
     output = shell_output("#{bin}/harnessie init demo 2>&1")
     assert_match "You are ready", output
+
+    (testpath/"ownership/workspace").mkpath
+    ownership = shell_output("#{bin}/harnessie --root #{testpath}/ownership ownership safe.txt --agent alice --json")
+    assert_match '"allowed": true', ownership
+    assert_match '"schema_version": 1', ownership
   end
 end
