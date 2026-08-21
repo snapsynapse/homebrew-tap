@@ -1,26 +1,26 @@
 class Agentlink < Formula
-  desc "Sync one AGENTS.md to every AI coding tool — symlinks, no codegen"
+  desc "Sync one AGENTS.md to every AI coding tool - symlinks, no codegen"
   homepage "https://agentlink.run/"
-  version "0.4.1"
+  version "0.4.2"
   license "MIT"
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.1/agentlink-darwin-arm64"
-      sha256 "8a2f0b2d0903171f3a4f60bfd598bde9353fa0e90c7c0a972adda7fd01fa2790"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-darwin-arm64"
+      sha256 "481c3a2de5f019a4304ee8e54bc301915e89cc2509f248615625de75198e783d"
     else
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.1/agentlink-darwin-amd64"
-      sha256 "31d4b69b4e990094cc3eaf86a8e5ab93dfdfdfaeb9522d2a14014b21edb7b8ea"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-darwin-amd64"
+      sha256 "81b7fd33d542a62e8956041de3975379a5a124678b55b6a3a5d7ad081ca3ad8d"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.1/agentlink-linux-arm64"
-      sha256 "e5514c7fb45488d9aae28e835103d100a6d5f6fa8eed8fb2a1182d731e55ceee"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-linux-arm64"
+      sha256 "36e27797a6a6927a4d04f724ca203f4c601f3e26dc5011cc517e8e01b9e3d2af"
     else
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.1/agentlink-linux-amd64"
-      sha256 "a7a04e4581b262c767a859e48f2b59d4be9989147a70067832d41c7eca88e8f8"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-linux-amd64"
+      sha256 "9372ad52c3fdf051bdfdd6809c42e9051dcc51604dcc5fdabd8ffe1d735aaf4f"
     end
   end
 
