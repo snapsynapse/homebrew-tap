@@ -5,21 +5,21 @@ class Agentlink < Formula
 
   on_macos do
     if Hardware::CPU.arm?
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-darwin-arm64"
-      sha256 "481c3a2de5f019a4304ee8e54bc301915e89cc2509f248615625de75198e783d"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.5.0/agentlink-darwin-arm64"
+      sha256 "572fedc6cf5d0b8674a5ae0917fe4a90ecbe8dd80604a3bbff5913ec40466647"
     else
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-darwin-amd64"
-      sha256 "81b7fd33d542a62e8956041de3975379a5a124678b55b6a3a5d7ad081ca3ad8d"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.5.0/agentlink-darwin-amd64"
+      sha256 "04618876b827e77579d09f7120b356ae7c1339d7c58ccec90731772563f36594"
     end
   end
 
   on_linux do
     if Hardware::CPU.arm?
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-linux-arm64"
-      sha256 "36e27797a6a6927a4d04f724ca203f4c601f3e26dc5011cc517e8e01b9e3d2af"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.5.0/agentlink-linux-arm64"
+      sha256 "6ea3c82a98fd009bcb4ab3ff54e79206680d7f5161b91f9e09cf49466e7323c1"
     else
-      url "https://github.com/snapsynapse/agentlink/releases/download/v0.4.2/agentlink-linux-amd64"
-      sha256 "9372ad52c3fdf051bdfdd6809c42e9051dcc51604dcc5fdabd8ffe1d735aaf4f"
+      url "https://github.com/snapsynapse/agentlink/releases/download/v0.5.0/agentlink-linux-amd64"
+      sha256 "34a946cd441f3e531edba82abcc2cf7e4332ee5ef9dcc8ca769a21dafaf62e39"
     end
   end
 
