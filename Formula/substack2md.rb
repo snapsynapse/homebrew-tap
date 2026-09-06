@@ -3,11 +3,15 @@ class Substack2md < Formula
 
   desc "Export Substack newsletters to clean Markdown with YAML frontmatter"
   homepage "https://github.com/snapsynapse/substack2md"
-  url "https://github.com/snapsynapse/substack2md/archive/refs/tags/v2.1.2.tar.gz"
-  sha256 "396d97ebdca89b66eb625da5da3560a89ca2bcc28b2757331d6fdc0dfcd05b89"
+  url "https://github.com/snapsynapse/substack2md/releases/download/v2.2.0/substack2md-2.2.0.tar.gz"
+  sha256 "952dcc47dd3a0a7cffa425e324e8e3dc1501724bbf2a0e6fce467976ea08a99a"
   license "MIT"
 
+  depends_on "libyaml"
   depends_on "python@3.13"
+
+  uses_from_macos "libxml2"
+  uses_from_macos "libxslt"
 
   resource "beautifulsoup4" do
     url "https://files.pythonhosted.org/packages/43/65/318323f98dbee45d42dff61d8f047181bc6f2268a9068cfad035a46be5af/beautifulsoup4-4.15.0.tar.gz"
@@ -20,8 +24,8 @@ class Substack2md < Formula
   end
 
   resource "chardet" do
-    url "https://files.pythonhosted.org/packages/19/b6/9df434a8eeba2e6628c465a1dfa31034228ef79b26f76f46278f4ef7e49d/chardet-7.4.3.tar.gz"
-    sha256 "cc1d4eb92a4ec1c2df3b490836ffa46922e599d34ce0bb75cf41fd2bf6303d56"
+    url "https://files.pythonhosted.org/packages/f3/0d/f7b6ab21ec75897ed80c17d79b15951a719226b9fababf1e40ea74d69079/chardet-5.2.0.tar.gz"
+    sha256 "1b3b6ff479a8c414bc3fa2c0852995695c4a026dcd6d0633b2dd092ca39c1cf7"
   end
 
   resource "charset-normalizer" do
@@ -30,8 +34,8 @@ class Substack2md < Formula
   end
 
   resource "cssselect" do
-    url "https://files.pythonhosted.org/packages/ec/2e/cdfd8b01c37cbf4f9482eefd455853a3cf9c995029a46acd31dfaa9c1dd6/cssselect-1.4.0.tar.gz"
-    sha256 "fdaf0a1425e17dfe8c5cf66191d211b357cf7872ae8afc4c6762ddd8ac47fc92"
+    url "https://files.pythonhosted.org/packages/72/0a/c3ea9573b1dc2e151abfe88c7fe0c26d1892fe6ed02d0cdb30f0d57029d5/cssselect-1.3.0.tar.gz"
+    sha256 "57f8a99424cfab289a1b6a816a43075a4b00948c86b4dcf3ef4ee7e15f7ab0c7"
   end
 
   resource "idna" do
@@ -54,14 +58,19 @@ class Substack2md < Formula
     sha256 "b274f1b5943180b031b699b199cbaeb1e2ac938b75851849a31fd0c3d6603d09"
   end
 
+  resource "packaging" do
+    url "https://files.pythonhosted.org/packages/7d/fa/3944b40b07da9ce895c0e6303a5ab7d53da063554f534556b134a54d6093/packaging-26.3.tar.gz"
+    sha256 "94edc256424af38762eb31306eed28beb9f0efc50a8837492c9d6fd6004aed79"
+  end
+
   resource "pyyaml" do
     url "https://files.pythonhosted.org/packages/05/8e/961c0007c59b8dd7729d542c61a4d537767a59645b82a0b521206e1e25c2/pyyaml-6.0.3.tar.gz"
     sha256 "d76623373421df22fb4cf8817020cbb7ef15c725b9d5e45f17e189bfc384190f"
   end
 
   resource "readability-lxml" do
-    url "https://files.pythonhosted.org/packages/55/3e/dc87d97532ddad58af786ec89c7036182e352574c1cba37bf2bf783d2b15/readability_lxml-0.8.4.1.tar.gz"
-    sha256 "9d2924f5942dd7f37fb4da353263b22a3e877ccf922d0e45e348e4177b035a53"
+    url "https://files.pythonhosted.org/packages/e9/fb/e7c40afabd660f121fca9f0993e39dc042974c80a6c04ec4b27d7fbd7323/readability_lxml-0.9.tar.gz"
+    sha256 "f7a5f88ee194ed6c5aa36d14593fbfb20c5d7bb8f3f5bc57734288d45a5abe26"
   end
 
   resource "requests" do
@@ -99,6 +108,17 @@ class Substack2md < Formula
   end
 
   test do
-    assert_match(/substack|usage/i, shell_output("#{bin}/substack2md --help"))
+    assert_match version.to_s, shell_output("#{bin}/substack2md --version")
+    (testpath/"input.md").write <<~MARKDOWN
+      # Homebrew smoke test
+
+      This paragraph must survive conversion.
+    MARKDOWN
+    system bin/"substack2md", "--from-md", testpath/"input.md",
+           "--url", "https://example.substack.com/p/homebrew-smoke",
+           "--base-dir", testpath/"output"
+    notes = (testpath/"output").glob("**/*.md")
+    assert_equal 1, notes.length
+    assert_match "This paragraph must survive conversion.", notes.first.read
   end
 end
