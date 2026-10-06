@@ -3,8 +3,8 @@ class Harnessie < Formula
 
   desc "Brain-agnostic agent harness with ownership and verification gates"
   homepage "https://harnessie.com/"
-  url "https://files.pythonhosted.org/packages/bd/d3/5a58603a52897a776f1d73a83e91fe62404f40ce6f43189625cf93527bb8/harnessie-1.4.1.tar.gz"
-  sha256 "4348ca226397a79d317dc619374b75019a43f8f660b30d3410d83d2cbf925d85"
+  url "PENDING-PYPI-1.5.0-SDIST-URL"
+  sha256 "PENDING"
   license "Apache-2.0"
 
   depends_on "rust" => :build
@@ -37,8 +37,8 @@ class Harnessie < Formula
   end
 
   resource "rpds-py" do
-    url "https://files.pythonhosted.org/packages/aa/2a/9618a122aeb2a169a28b03889a2995fe297588964333d4a7d67bdf46e147/rpds_py-2026.6.3.tar.gz"
-    sha256 "1cebd1337c242e4ec2293e541f712b2da849b29f48f0c293684b71c0632625d4"
+    url "https://files.pythonhosted.org/packages/42/68/3bd46b8a5e01d3c2ebdf9c5e9497912e3fe0cde02bac21a7130ca866e403/rpds_py-2026.9.1.tar.gz"
+    sha256 "4793ef7f78268b124b73fa933440f01d258bbae01de9fa53e9080c9ab0425a12"
   end
 
   def install
