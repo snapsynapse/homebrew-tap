@@ -11,7 +11,7 @@ class PrompterKit < Formula
     libexec.install "prompter_kit.py"
     (bin/"prompter-kit").write <<~SH
       #!/bin/sh
-      exec "#{Formula["python@3.13"].opt_bin}/python3.13" "#{libexec}/prompter_kit.py" "$@"
+      exec "#{formula_opt_bin("python@3.13")}/python3.13" "#{libexec}/prompter_kit.py" "$@"
     SH
   end
 
