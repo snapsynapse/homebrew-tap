@@ -3,8 +3,8 @@ class Harnessie < Formula
 
   desc "Brain-agnostic agent harness with ownership and verification gates"
   homepage "https://harnessie.com/"
-  url "PENDING-PYPI-1.5.0-SDIST-URL"
-  sha256 "PENDING"
+  url "https://files.pythonhosted.org/packages/9a/4c/c258972b5cf4c20bcc44ff94a46fcbb0f7ae1a9aeac591b0491096a44bb7/harnessie-1.5.0.tar.gz"
+  sha256 "1ec6d7662bcb7df5c947a7f284f537ffb77ed4e3adb98437ee967a7908c99e20"
   license "Apache-2.0"
 
   depends_on "rust" => :build
