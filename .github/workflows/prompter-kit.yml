@@ -1,0 +1,59 @@
+name: PrompterKit formula
+
+on:
+  pull_request:
+    paths:
+      - Formula/prompter-kit.rb
+      - .github/workflows/prompter-kit.yml
+  push:
+    branches:
+      - main
+    paths:
+      - Formula/prompter-kit.rb
+      - .github/workflows/prompter-kit.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: prompter-kit-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  formula:
+    name: Native Homebrew validation
+    runs-on: macos-15
+    timeout-minutes: 15
+    env:
+      HOMEBREW_NO_AUTO_UPDATE: "1"
+      HOMEBREW_NO_ANALYTICS: "1"
+      HOMEBREW_NO_INSTALL_CLEANUP: "1"
+    steps:
+      - name: Check out the exact source commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.head.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Tap the checked-out formula and check Ruby syntax
+        shell: bash
+        run: |
+          set -euo pipefail
+          brew --version
+          brew tap --custom-remote snapsynapse/tap "$GITHUB_WORKSPACE"
+          tap="$(brew --repository snapsynapse/tap)"
+          test "$(git -C "$tap" rev-parse HEAD)" = "$(git rev-parse HEAD)"
+          git rev-parse HEAD
+          ruby -c "$tap/Formula/prompter-kit.rb"
+
+      - name: Install the release source with Homebrew
+        run: brew install --build-from-source snapsynapse/tap/prompter-kit
+
+      - name: Test the installed CLI
+        run: brew test snapsynapse/tap/prompter-kit
+
+      - name: Check formula style
+        run: brew style "$(brew --repository snapsynapse/tap)/Formula/prompter-kit.rb"
+
+      - name: Audit the installed formula
+        run: brew audit --strict snapsynapse/tap/prompter-kit
