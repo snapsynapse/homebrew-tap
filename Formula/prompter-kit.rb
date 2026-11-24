@@ -1,8 +1,8 @@
 class PrompterKit < Formula
   desc "Backup, restore, and manage Elgato Prompter scripts from the command-line"
   homepage "https://prompterkit.app/"
-  url "https://github.com/snapsynapse/prompter-kit/releases/download/v1.0.3/prompterkit-1.0.3.tar.gz"
-  sha256 "736e0753a25fb3f7d280820a983450d2f5c1caab6bffb46d6e2977d51f529e28"
+  url "https://github.com/snapsynapse/prompter-kit/releases/download/v1.0.4/prompterkit-1.0.4.tar.gz"
+  sha256 "e16737c456776cb21969cc0b75c6b04082757edcd72e70db642e3df95d12dda6"
   license "MIT"
 
   depends_on "python@3.13"
@@ -24,6 +24,7 @@ class PrompterKit < Formula
 
   test do
     assert_match(/prompter|usage/i, shell_output("#{bin}/prompter-kit --help"))
+    assert_equal "PrompterKit #{version}", shell_output("#{bin}/prompter-kit --version").strip
 
     content = "  account_id #42 **literal**  \n1. Keep numbering\n\n[link](url)\n"
     (testpath/"source.txt").write content
